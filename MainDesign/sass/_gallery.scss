@@ -1,0 +1,43 @@
+.gallery {
+  grid-column: full-start / full-end;
+
+  background-image: linear-gradient(
+      rgba($color-grey-dark-3, 0.53),
+      rgba($color-grey-dark-3, 0.53)
+    ),
+    url(../img/gallery_img1.jpg);
+
+  background-size: cover;
+  background-position: bottom;
+  position: relative;
+
+  &__text-box {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    /* 50%, 50%만큼 이동시켰다가 다시 거기서 -50%, -50%만큼 이동시켜버리네. 그래서 정확히 가운데가 됨. 이건 개꿀팀이다. */
+    transform: translate(-50%, -50%);
+
+    @media only screen and (max-width: $bp-large) {
+      width: 80vw;
+    }
+  }
+
+  &__link {
+    color: white;
+    font-size: 1.25rem;
+    text-decoration: none;
+    padding-right: 2rem;
+
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+
+    margin-right: 0.85rem;
+    // fill: $color-grey-dark-2;
+  }
+}

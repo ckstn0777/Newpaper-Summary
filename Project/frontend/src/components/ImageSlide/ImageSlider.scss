@@ -1,0 +1,66 @@
+@import '~react-image-gallery/styles/scss/image-gallery.scss';
+
+.image-gallery {
+  grid-column: full-start / full-end;
+}
+.image-gallery-slide .image-gallery-image {
+  object-fit: cover;
+  height: 80vh;
+}
+.image-gallery-slides {
+  white-space: inherit;
+}
+
+.image-gallery-textbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60vw;
+  line-height: 1.6;
+
+  @media only screen and (max-width: 56.25em) {
+    width: 80vw;
+  }
+}
+.image-gallery-title {
+  color: #f9f7f6;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 5rem;
+  word-spacing: 5px;
+  letter-spacing: 5px;
+  margin-bottom: 2.25rem;
+
+  @media only screen and (max-width: 56.25em) {
+    font-size: 4rem;
+  }
+}
+.image-gallery-detail {
+  color: #f9f7f6;
+  font-size: 3rem;
+  margin-bottom: 2.25rem;
+  text-align: left;
+
+  @media only screen and (max-width: 56.25em) {
+    font-size: 2rem;
+  }
+}
+
+.image-gallery-icon--box {
+  color: white;
+  font-size: 1.25rem;
+  text-decoration: none;
+  padding-right: 2rem;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.image-gallery-icon--svg {
+  height: 2.25rem;
+  width: 2.25rem;
+
+  fill: #ccc;
+  margin-right: 0.85rem;
+}

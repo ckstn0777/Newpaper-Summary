@@ -1,0 +1,46 @@
+// COLOR VARIABLES
+$color-primary: #c69963;
+$color-primary-dark: #b28451;
+
+$color-grey-dark-1: #333;
+$color-grey-dark-2: #777;
+$color-grey-dark-3: #999;
+$color-grey-dark-4: #343a40;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #f0eeee;
+$color-grey-light-3: #ccc;
+$color-grey-light-4: #aaa;
+
+// FONT VARIABLES
+$font-primary: 'Open Sans', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+
+// RESPONSEIVE BREAKEPOINTS
+$bp-largest: 75em; // 1200px
+$bp-large: 56.25em; // 900px
+$bp-medium: 37.5em; // 600px
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 10px/16 = 62.5% -> 1rem = 10px
+
+  @media only screen and (max-width: $bp-largest) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: $font-primary;
+  color: $color-grey-dark-2;
+  font-weight: 300;
+  line-height: 1.6;
+}

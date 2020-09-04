@@ -1,0 +1,64 @@
+.content {
+  background-color: $color-grey-light-3;
+  grid-column: full-start / full-end;
+
+  padding: 5rem 10rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 5rem;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    grid-auto-flow: dense;
+    // grid-template-rows: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 10rem;
+    align-items: start;
+
+    @media only screen and (max-width: $bp-large) {
+      grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+      grid-gap: 6rem;
+    }
+  }
+
+  &__card {
+    &--img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &--text {
+      background-color: white;
+      padding: 2rem;
+    }
+  }
+
+  &__link {
+    font-size: 1.25rem;
+    text-decoration: none;
+    padding-right: 2rem;
+
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+
+    margin-right: 0.85rem;
+
+    &--heart {
+      fill: red;
+    }
+
+    &--chat {
+      fill: blue;
+    }
+
+    &--more {
+      fill: green;
+    }
+  }
+}
