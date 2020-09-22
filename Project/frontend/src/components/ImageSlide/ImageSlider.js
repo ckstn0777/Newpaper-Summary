@@ -41,8 +41,8 @@ const ImageSlider = () => {
       showPlayButton={false}
       showNav={true}
       showBullets={true}
-      autoPlay={false}
-      slideInterval={5000}
+      autoPlay={true}
+      slideInterval={30000}
       slideDuration={1000}
     />
   );

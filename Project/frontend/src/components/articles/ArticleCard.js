@@ -72,21 +72,21 @@ const ArticleCard = ({ article, onArticleOpen }) => {
           className="content-detail"
           dangerouslySetInnerHTML={{ __html: summary_content }}
         />
-        <div class="content__icons">
-          <div class="content__link">
-            <svg class="content__icon content__icon--heart">
+        <div className="content__icons">
+          <div className="content__link">
+            <svg className="content__icon content__icon--heart">
               <use xlinkHref="images/sprite.svg#icon-heart"></use>
             </svg>
             <span>31</span>
           </div>
-          <div class="content__link">
-            <svg class="content__icon content__icon--chat">
+          <div className="content__link">
+            <svg className="content__icon content__icon--chat">
               <use xlinkHref="images/sprite.svg#icon-chat"></use>
             </svg>
             <span>21</span>
           </div>
-          <div class="content__link" onClick={() => onArticleOpen(id)}>
-            <svg class="content__icon content__icon--more">
+          <div className="content__link" onClick={() => onArticleOpen(id)}>
+            <svg className="content__icon content__icon--more">
               <use xlinkHref="images/sprite.svg#icon-list"></use>
             </svg>
             <span>Read more</span>

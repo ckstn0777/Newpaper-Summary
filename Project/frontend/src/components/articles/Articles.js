@@ -1,13 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import Select from 'react-select';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import { color, responsive } from '../../lib/styles/utils';
 import ArticleCard from './ArticleCard';
 import { withRouter } from 'react-router-dom';
 import ArticleModal from '../popup/ArticleModal';
-import { isNullLiteralTypeAnnotation } from '../../../../../../../AppData/Local/Microsoft/TypeScript/3.9/node_modules/@babel/types/lib/index';
+import { ko } from 'date-fns/locale';
+import 'react-datepicker/dist/react-datepicker.css';
+import './react-datepicker-custom.scss';
+import Loading from '../common/Loading';
 
 const ArticlesBlock = styled.div`
   background-color: ${color.grayLight[2]};
@@ -45,17 +47,24 @@ const CardsBlock = styled.div`
 `;
 
 const SelectBlock = styled(Select)`
-  width: 200px;
+  width: 18rem;
   font-size: 1.6rem;
 `;
 
+const DateBlock = styled.div`
+  width: 18rem;
+`;
+
+registerLocale('ko', ko);
+
 const Articles = ({ articles, loading, error, children, history }) => {
+  // 카데고리 상태
   const [category, setCategory] = useState({
     selectedOption: null,
   });
-  const [date, setDate] = useState({
-    selectedDate: new Date(),
-  });
+  // 날짜 상태
+  const [date, setDate] = useState(new Date());
+  // 모달 상태
   const [modal, setModal] = useState({
     visible: false,
     article: null,
@@ -90,7 +99,7 @@ const Articles = ({ articles, loading, error, children, history }) => {
   // 날짜 변경시
   const onDateChange = useCallback((selectedDate) => {
     console.log(selectedDate);
-    setDate({ selectedDate });
+    setDate(selectedDate);
   }, []);
 
   // 팝업창 On/Off 시
@@ -111,12 +120,17 @@ const Articles = ({ articles, loading, error, children, history }) => {
     <>
       <ArticlesBlock>
         <ArticlesHeading>
-          <DatePicker
-            locale="ko"
-            selected={date.selectedDate}
-            onChange={onDateChange}
-            popperModifiers={{ preventOverflow: { enabled: true } }}
-          />
+          <DateBlock>
+            <DatePicker
+              selected={date}
+              onChange={onDateChange}
+              locale="ko"
+              dateFormat="yyyy.MM.dd(eee)"
+              maxDate={new Date()}
+              placeholderText="Weeks start on Monday"
+            />
+          </DateBlock>
+
           <h3>Newest articles</h3>
           <SelectBlock
             value={category.selectedOption}
@@ -143,6 +157,7 @@ const Articles = ({ articles, loading, error, children, history }) => {
         onCancle={onCancle}
         selectedArticle={selectedArticle}
       />
+      {loading && <Loading />}
     </>
   );
 };

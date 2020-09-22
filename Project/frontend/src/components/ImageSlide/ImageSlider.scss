@@ -2,6 +2,7 @@
 
 .image-gallery {
   grid-column: full-start / full-end;
+  overflow: hidden;
 }
 .image-gallery-slide .image-gallery-image {
   object-fit: cover;

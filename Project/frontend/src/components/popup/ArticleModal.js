@@ -154,11 +154,11 @@ const ArticleModal = ({ modal, onCancle }) => {
           <h3 className="popup-subtitle">기사입력 2020.08.02. 오후 6:04</h3>
 
           <div className="popup-articleBody">
-            <img
+            {/* <img
               src="/images/popup_image1.jpg"
               alt="Article 1"
               className="popup__img"
-            />
+            /> */}
             <p
               className="popup__text"
               dangerouslySetInnerHTML={{ __html: article.content }}
