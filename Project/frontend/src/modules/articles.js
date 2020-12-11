@@ -7,10 +7,14 @@ const LIST_ARTICLE = 'article/LIST_ARTICLE';
 const LIST_ARTICLE_SUCCESS = 'article/LIST_ARTICLE_SUCCESS';
 const LIST_ARTICLE_FAILURE = 'article/LIST_ARTICLE_FAILURE';
 
-export const listArticle = createAction(LIST_ARTICLE, ({ category, page }) => ({
-  category,
-  page,
-}));
+export const listArticle = createAction(
+  LIST_ARTICLE,
+  ({ category, page, selectedDate }) => ({
+    category,
+    page,
+    selectedDate,
+  }),
+);
 
 const listArticleSaga = createRequestSaga(LIST_ARTICLE, articleAPI.list);
 export function* articleSaga() {

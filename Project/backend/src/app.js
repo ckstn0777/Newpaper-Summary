@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
@@ -19,21 +20,19 @@ const router = new Router();
 app.use(bodyParser());
 app.use(jwtMiddleware);
 
-// 라우터 설정
-router.use('/api', api.routes()); // api 라우터 적용
-
-// app 인스턴스에 라우터 적용
+// 라우터 설정(api 라우터 적용)
+router.use('/api', api.routes());
 app.use(router.routes()).use(router.allowedMethods());
 
-const buildDirectory = path.resolve(__dirname, '../../frontend/build');
-app.use(serve(buildDirectory));
-app.use(async (ctx) => {
-  // Not Found이고, 주소가 /api로 시작하지 않는 경우
-  if (ctx.status === 404 && ctx.path.indexOf('/api') !== 0) {
-    // index.html 내용 반환
-    await send(ctx, 'index.html', { root: buildDirectory });
-  }
-});
+// const buildDirectory = path.resolve(__dirname, '../../frontend/build');
+// app.use(serve(buildDirectory));
+// app.use(async (ctx) => {
+//   // Not Found이고, 주소가 /api로 시작하지 않는 경우
+//   if (ctx.status === 404 && ctx.path.indexOf('/api') !== 0) {
+//     // index.html 내용 반환
+//     await send(ctx, 'index.html', { root: buildDirectory });
+//   }
+// });
 
 // PORT가 정해지지 않았다면 기본으로 4000사용
 const port = PORT || 4000;

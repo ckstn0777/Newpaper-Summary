@@ -1,0 +1,2 @@
+이미지 생성 : docker build -t summary:0.0 ./
+컨테이너 생성 : docker run -p 4000:4000 --name summary_container --nethost summary:0.0

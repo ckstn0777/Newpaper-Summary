@@ -4,7 +4,7 @@ import { color, responsive } from '../../lib/styles/utils';
 import Button from './Button';
 
 const HeaderBlock = styled.header`
-  background-color: ${color.grayLight[0]};
+  background-color: ${color.grayDark[0]};
   grid-column: full-start / full-end;
   font-size: 1.4rem;
   border-bottom: 1px solid ${color.grayLight[1]};
@@ -19,7 +19,7 @@ const HeaderBlock = styled.header`
 `;
 
 const HeaderTitle = styled.h1`
-  color: ${color.grayDark[0]};
+  color: ${color.grayLight[1]};
   margin-left: 2rem;
 `;
 

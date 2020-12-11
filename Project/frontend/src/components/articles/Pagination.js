@@ -4,6 +4,7 @@ import qs from 'qs';
 import Button from '../common/Button';
 import { withRouter } from 'react-router-dom';
 import { listArticle } from '../../modules/articles';
+import moment from 'moment';
 
 const PaginationBlock = styled.div`
   width: 320px;
@@ -18,13 +19,17 @@ const PageNumber = styled.div`
   font-weight: 600;
 `;
 
-const buildLink = ({ category, page }) => {
-  const query = qs.stringify({ category, page });
-  return `/?${query}`;
+const buildLink = ({ category, selectedDate, page }) => {
+  const query = qs.stringify({ category, selectedDate, page });
+  return `?${query}`;
 };
 
 const Pagination = ({ lastPage, location, dispatch }) => {
-  let { category = 'all', page = 1 } = qs.parse(location.search, {
+  let {
+    category = 'all',
+    selectedDate = moment(new Date()).format('YYYYMMDD'),
+    page = 1,
+  } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
 
@@ -35,15 +40,20 @@ const Pagination = ({ lastPage, location, dispatch }) => {
       listArticle({
         category,
         page,
+        selectedDate,
       }),
     );
-  }, [dispatch, category, page]);
+  }, [dispatch, category, page, selectedDate]);
 
   return (
     <PaginationBlock>
       <Button
         disabled={page === 1}
-        to={page === 1 ? undefined : buildLink({ category, page: page - 1 })}
+        to={
+          page === 1
+            ? undefined
+            : buildLink({ category, selectedDate, page: page - 1 })
+        }
       >
         prev
       </Button>
@@ -53,7 +63,7 @@ const Pagination = ({ lastPage, location, dispatch }) => {
         to={
           page === lastPage
             ? undefined
-            : buildLink({ category, page: page + 1 })
+            : buildLink({ category, selectedDate, page: page + 1 })
         }
       >
         next

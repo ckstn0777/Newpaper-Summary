@@ -1350,7 +1350,7 @@ export default class ImageGallery extends React.Component {
             <div className="image-gallery-textbox">
               <h1 className="image-gallery-title">{item.title}</h1>
               <h3 className="image-gallery-detail">{item.detail}</h3>
-              <div>
+              {/* <div>
                 <div className="image-gallery-icon--box">
                   <svg className="image-gallery-icon--svg">
                     <use xlinkHref="/images/sprite.svg#icon-heart"></use>
@@ -1369,7 +1369,7 @@ export default class ImageGallery extends React.Component {
                   </svg>
                   <span>Read more</span>
                 </div>
-              </div>
+              </div> */}
             </div>
             <img
               className="image-gallery-image"

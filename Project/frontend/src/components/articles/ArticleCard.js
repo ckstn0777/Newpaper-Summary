@@ -11,6 +11,7 @@ const CardImage = styled.img`
 const CartTextBox = styled.div`
   background-color: white;
   padding: 2rem;
+  margin-top: -5px;
 
   .content-post {
     font-size: 1.1rem;
@@ -20,6 +21,8 @@ const CartTextBox = styled.div`
   .content-title {
     font-size: 2rem;
     margin-bottom: 1.25rem;
+    border-bottom: 1px solid gray;
+    padding: 5px 0;
   }
 
   .content-detail {
@@ -30,18 +33,26 @@ const CartTextBox = styled.div`
   .content__link {
     font-size: 1.25rem;
     text-decoration: none;
-    padding-right: 2rem;
 
     display: inline-flex;
     align-items: center;
+
+    background: antiquewhite;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: black;
+
     cursor: pointer;
+  }
+
+  .content__icons {
+    margin-top: 2rem;
+    text-align: right;
   }
 
   .content__icon {
     height: 2.25rem;
     width: 2.25rem;
-
-    margin-right: 0.85rem;
 
     &--heart {
       fill: #ffc9c9;
@@ -52,7 +63,7 @@ const CartTextBox = styled.div`
     }
 
     &--more {
-      fill: #b2f2bb;
+      fill: #00d564;
     }
   }
 `;
@@ -63,7 +74,13 @@ const ArticleCard = ({ article, onArticleOpen }) => {
   const postDate = moment(save_date).format('DD MMMM YYYY');
 
   return (
-    <div>
+    <div
+      style={{
+        borderRadius: '20px',
+        overflow: 'hidden',
+        boxShadow: '0px 0px 1rem rgba(0, 0, 0, 0.3)',
+      }}
+    >
       <CardImage src={'/images/card-image1.jpg'} alt="Card 1" />
       <CartTextBox>
         <p className="content-post">posted on: {postDate}</p>
@@ -73,7 +90,7 @@ const ArticleCard = ({ article, onArticleOpen }) => {
           dangerouslySetInnerHTML={{ __html: summary_content }}
         />
         <div className="content__icons">
-          <div className="content__link">
+          {/* <div className="content__link">
             <svg className="content__icon content__icon--heart">
               <use xlinkHref="images/sprite.svg#icon-heart"></use>
             </svg>
@@ -84,7 +101,7 @@ const ArticleCard = ({ article, onArticleOpen }) => {
               <use xlinkHref="images/sprite.svg#icon-chat"></use>
             </svg>
             <span>21</span>
-          </div>
+          </div> */}
           <div className="content__link" onClick={() => onArticleOpen(id)}>
             <svg className="content__icon content__icon--more">
               <use xlinkHref="images/sprite.svg#icon-list"></use>

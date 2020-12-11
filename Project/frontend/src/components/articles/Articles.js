@@ -10,6 +10,7 @@ import { ko } from 'date-fns/locale';
 import 'react-datepicker/dist/react-datepicker.css';
 import './react-datepicker-custom.scss';
 import Loading from '../common/Loading';
+import moment from 'moment';
 
 const ArticlesBlock = styled.div`
   background-color: ${color.grayLight[2]};
@@ -60,7 +61,7 @@ registerLocale('ko', ko);
 const Articles = ({ articles, loading, error, children, history }) => {
   // 카데고리 상태
   const [category, setCategory] = useState({
-    selectedOption: null,
+    selectedOption: { value: 'all', label: 'all' },
   });
   // 날짜 상태
   const [date, setDate] = useState(new Date());
@@ -69,7 +70,6 @@ const Articles = ({ articles, loading, error, children, history }) => {
     visible: false,
     article: null,
   });
-  let selectedArticle = null;
 
   const options = [
     { value: 'all', label: 'all' },
@@ -90,26 +90,42 @@ const Articles = ({ articles, loading, error, children, history }) => {
 
       history.push({
         pathname: '',
-        search: `?category=${selectedOption.value}`,
+        search: `?category=${selectedOption.value}&selectedDate=${moment(
+          date,
+        ).format('YYYYMMDD')}`,
       });
     },
-    [history],
+    [history, date],
   );
 
   // 날짜 변경시
-  const onDateChange = useCallback((selectedDate) => {
-    console.log(selectedDate);
-    setDate(selectedDate);
-  }, []);
+  const onDateChange = useCallback(
+    (selectedDate) => {
+      setDate(selectedDate);
+
+      history.push({
+        pathname: '',
+        search: `?category=${
+          category.selectedOption.value
+        }&selectedDate=${moment(selectedDate).format('YYYYMMDD')}`,
+      });
+    },
+    [history, category],
+  );
 
   // 팝업창 On/Off 시
-  const onCancle = () => {
+  const onCancle = useCallback(() => {
     setModal({ ...modal, visible: false });
-  };
-  const onArticleOpen = (articleId) => {
-    selectedArticle = articles.filter((article) => article.id === articleId);
-    setModal({ ...modal, visible: true, article: selectedArticle[0] });
-  };
+  }, [modal]);
+  const onArticleOpen = useCallback(
+    (articleId) => {
+      let selectedArticle = articles.filter(
+        (article) => article.id === articleId,
+      );
+      setModal({ ...modal, visible: true, article: selectedArticle[0] });
+    },
+    [modal, articles],
+  );
 
   // 에러 발생시
   if (error) {
@@ -132,6 +148,7 @@ const Articles = ({ articles, loading, error, children, history }) => {
           </DateBlock>
 
           <h3>Newest articles</h3>
+
           <SelectBlock
             value={category.selectedOption}
             onChange={onCategoryChange}
@@ -152,14 +169,10 @@ const Articles = ({ articles, loading, error, children, history }) => {
         </CardsBlock>
         {children}
       </ArticlesBlock>
-      <ArticleModal
-        modal={modal}
-        onCancle={onCancle}
-        selectedArticle={selectedArticle}
-      />
+      <ArticleModal modal={modal} onCancle={onCancle} />
       {loading && <Loading />}
     </>
   );
 };
 
-export default withRouter(Articles);
+export default React.memo(withRouter(Articles));
